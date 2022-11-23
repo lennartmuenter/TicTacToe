@@ -26,8 +26,7 @@ foreach($fields as $field){
 	}
 	$i++;
 }
-
-$html = '
+?>
 	<!DOCTYPE html>
 	<html>
 	<head>
@@ -49,7 +48,3 @@ $html = '
 
 	</body>
 	</html>	
-';
-
-echo $html;
-?>
