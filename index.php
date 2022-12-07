@@ -3,8 +3,8 @@ session_start();
 
 $_SESSION = handlePost();
 function handlePost(){
-	if(isset($_POST["reset"])) {
-		resetsession();
+	if(isset($_POST["resetfields"])) {
+		resetfields();
 	}if(isset($_POST["o"])) {
 		$_SESSION['player'] = 'o';
 	}if(isset($_POST["x"])) {
@@ -48,11 +48,13 @@ if($player == null || $mode == null || $fields == null){
 	$game = build($fields);
 }
 
+//print_r($fields);
+
 function build($fields){
 	$cross = '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-full h-full"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>';
 	$circle = '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-full h-full"><path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>';
 	$won = 'bg-green-200';
-	$aftercontent = '</form><form method="post" class="mb-0 pt-10"><input name="reset" type="submit" value="reset" class="inline-flex items-center justify-center rounded-md border border-transparent bg-gray-600 w-20 h-10 text-base font-medium text-white hover:bg-black"/></form>';
+	$aftercontent = '</form><form method="post" class="mb-0 pt-10"><input name="resetfields" type="submit" value="reset" class="inline-flex items-center justify-center rounded-md border border-transparent bg-gray-600 w-20 h-10 text-base font-medium text-white hover:bg-black"/></form>';
 	$game = '<form method="post" class="mb-0 grid grid-rows-3 grid-flow-col gap-5">';
 	$i = 0;
 	$input = '<input name="0" type="submit" value="" class="h-20 w-20"/>';
@@ -131,7 +133,9 @@ function resetsession(){
 	session_destroy();
 	header("Refresh:0");
 }
-
+function resetfields(){
+	unset($_SESSION['fields']);
+}
 
 function has_winner($moves, $fields){
 	if($moves == null){
@@ -218,3 +222,13 @@ function html($game){
 }
 
 echo html($game);
+/*
+if($mode == 'n'){
+	if($player == 'x'){
+		$_SESSION['player'] = 'o';
+		$player = 'o';
+	} else {
+		$_SESSION['player'] = 'x';
+		$player = 'x';
+	}
+}*/
