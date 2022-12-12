@@ -27,7 +27,7 @@ $wcross = '<div class="box-border h-20 w-20 rounded-lg bg-green-200 shadow-inner
 $wcircle = '<div class="box-border h-20 w-20 rounded-lg bg-green-200 shadow-inner grid place-content-center p-3"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-full h-full"><path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg></div>';
 
 $i = 0;
-$mode = 0;
+$mode = 1;
 
 for($a = 0; $a <= 9; $a++){
 	if(isset($_POST["$a"])) {
