@@ -1,6 +1,8 @@
 <?php
 session_start();
+
 $fields = [0,0,0, 0,0,0, 0,0,0];
+
 if($_SESSION["fields"] != null){
 	$fields = $_SESSION["fields"];
 }
@@ -9,14 +11,6 @@ if($_SESSION['user'] == null){
 } else {
 	$user = $_SESSION['user'];
 }
-
-
-if($_SESSION['user'] == 2){
-	$bot = 1;
-} else{
-	$bot = 2;
-}
-
 
 $crossbox = '<div class="box-border h-20 w-20 rounded-lg bg-gray-100 shadow-inner grid place-content-center p-3"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-full h-full"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" /></svg></div>';
 $circlebox = '<div class="box-border h-20 w-20 rounded-lg bg-gray-100 shadow-inner grid place-content-center p-3"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-full h-full"><path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg></div>';
@@ -27,20 +21,15 @@ $wcross = '<div class="box-border h-20 w-20 rounded-lg bg-green-200 shadow-inner
 $wcircle = '<div class="box-border h-20 w-20 rounded-lg bg-green-200 shadow-inner grid place-content-center p-3"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-full h-full"><path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg></div>';
 
 $i = 0;
-$mode = 1;
 
 for($a = 0; $a <= 9; $a++){
 	if(isset($_POST["$a"])) {
 		$fields[$a] = $user;
-		if($mode == 0){
-			$fields = bot($fields, $bot, $user);
-		} else {
-			if($user == 1){
-				$_SESSION['user'] = 2;
-			} else if($user == 2){
-				$_SESSION['user'] = 1;
-			}
-		}
+    if($user == 1){
+      $_SESSION['user'] = 2;
+    } else if($user == 2){
+      $_SESSION['user'] = 1;
+    }
 		$fields = win($fields);
 		$_SESSION["fields"] = $fields;
 	}
@@ -90,45 +79,6 @@ function winner($field){
 		return 5;
 	}
 }
-
-function bot($fields, $bot, $user){
-	$a = $fields[0];
-	$b = $fields[1];
-	$c = $fields[2];
-	$d = $fields[3];
-	$e = $fields[4];
-	$f = $fields[5];
-	$g = $fields[6];
-	$h = $fields[7];
-	$j = $fields[8];
-	
-	if($e== 0){
-		$e = $bot;
-	} else if($a && $c == $user && $b == 0){
-		$b = $bot;
-	} else if($g && $j == $user && $h == 0){
-		$h = $bot;
-	} else if($a && $g == $user && $d == 0){
-		$d = $bot;
-	} else if($c && $j == $user && $f == 0){
-		$f = $bot;
-	} else if($e == $user && $g == 0){
-		$g = $bot;
-	}
-	
-
-	$fields[0] = $a;
-	$fields[1] = $b;
-	$fields[2] = $c;
-	$fields[3] = $d;
-	$fields[4] = $e;
-	$fields[5] = $f;
-	$fields[6] = $g;
-	$fields[7] = $h;
-	$fields[8] = $j;
-	return $fields;
-}
-
 
 foreach($fields as $field){
 	if($field == 1){
